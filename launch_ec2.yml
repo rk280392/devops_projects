@@ -1,0 +1,20 @@
+---
+- name: This play is used to launch EC2 Instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+          - name: creating ec2 instance
+            ec2:
+                    instance_type: t2.micro
+                    image: ami-07d0cf3af28718ef8 
+                    count: 1
+                    key_name: ansible_key
+                    region: us-east-1
+                    wait: yes
+                    group_id: sg-088eab7d424ed8067
+                    instance_tags:
+                            Name: cloudwatch test
+                            Env: Testing
+                    monitoring: yes
+                    vpc_subnet_id: subnet-edffdfb1
